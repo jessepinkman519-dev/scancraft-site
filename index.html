@@ -2,56 +2,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ScanCraft | Turn Every Customer Interaction Into an Experience</title>
+  <title>ScanCraft | QR-Powered Digital Experiences</title>
   <meta
     name="description"
-    content="ScanCraft builds QR-powered digital experiences for local businesses — transforming customer interactions into branded, mobile-first conversion systems."
+    content="ScanCraft builds QR-powered digital experiences for local businesses — transforming menus, products, spaces, and customer interactions into branded conversion systems."
   />
   <style>
     :root{
-      --bg:#071018;
-      --bg-2:#0b1622;
-      --panel:rgba(255,255,255,0.06);
-      --panel-2:rgba(255,255,255,0.09);
-      --line:rgba(255,255,255,0.10);
-      --text:#eef7ff;
-      --muted:#9db0c2;
-      --accent:#64e7ff;
-      --accent-2:#8dffc8;
-      --dark:#041017;
-      --shadow:0 20px 60px rgba(0,0,0,0.35);
-      --radius:24px;
-      --max:1180px;
+      --bg:#041019;
+      --bg-2:#081623;
+      --bg-3:#0d2131;
+      --panel:rgba(255,255,255,.06);
+      --panel-2:rgba(255,255,255,.1);
+      --line:rgba(255,255,255,.1);
+      --text:#eef8ff;
+      --muted:#9cb4c7;
+      --accent:#63e7ff;
+      --accent-2:#8dffc7;
+      --accent-3:#6fa7ff;
+      --dark:#06131d;
+      --shadow:0 24px 70px rgba(0,0,0,.38);
+      --radius:26px;
+      --max:1200px;
     }*{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
   margin:0;
   font-family:Inter,Arial,sans-serif;
   color:var(--text);
-  background:
-    radial-gradient(circle at top left, rgba(100,231,255,0.14), transparent 28%),
-    radial-gradient(circle at 85% 10%, rgba(141,255,200,0.08), transparent 22%),
-    linear-gradient(180deg, #061018 0%, #091420 100%);
   line-height:1.55;
+  background:
+    radial-gradient(circle at 10% 8%, rgba(99,231,255,.18), transparent 22%),
+    radial-gradient(circle at 92% 14%, rgba(141,255,199,.12), transparent 18%),
+    radial-gradient(circle at 75% 80%, rgba(111,167,255,.1), transparent 18%),
+    linear-gradient(180deg, #031019 0%, #061520 30%, #081925 60%, #04111a 100%);
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size:36px 36px;
+  mask-image:linear-gradient(180deg, rgba(255,255,255,.45), transparent 80%);
+  z-index:0;
 }
 
 a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
 .container{
   width:min(calc(100% - 28px), var(--max));
   margin:0 auto;
+  position:relative;
+  z-index:1;
 }
 
 .nav{
   position:sticky;
   top:0;
   z-index:1000;
-  backdrop-filter:blur(14px);
-  background:rgba(7,16,24,0.78);
-  border-bottom:1px solid rgba(255,255,255,0.06);
+  backdrop-filter:blur(16px);
+  background:rgba(4,16,25,.76);
+  border-bottom:1px solid rgba(255,255,255,.06);
 }
 
 .nav-inner{
-  min-height:74px;
+  min-height:78px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -61,21 +82,37 @@ a{color:inherit;text-decoration:none}
 .brand{
   display:flex;
   align-items:center;
-  gap:12px;
-  font-weight:800;
-  letter-spacing:.04em;
+  gap:14px;
+  font-weight:900;
+  letter-spacing:.06em;
 }
 
-.brand-mark{
-  width:42px;
-  height:42px;
-  border-radius:14px;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(135deg, rgba(100,231,255,.22), rgba(141,255,200,.18));
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow:0 10px 30px rgba(100,231,255,.12);
-  font-size:.95rem;
+.brand-logo{
+  width:48px;
+  height:48px;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 12px 30px rgba(99,231,255,.18);
+  border:1px solid rgba(255,255,255,.1);
+  flex:0 0 auto;
+}
+
+.brand-text{
+  display:flex;
+  flex-direction:column;
+  line-height:1;
+}
+
+.brand-text strong{
+  font-size:1rem;
+  letter-spacing:.12em;
+}
+
+.brand-text span{
+  font-size:.72rem;
+  color:var(--muted);
+  margin-top:4px;
+  letter-spacing:.16em;
 }
 
 .nav-links{
@@ -95,32 +132,54 @@ a{color:inherit;text-decoration:none}
   gap:10px;
   border-radius:999px;
   padding:14px 22px;
-  font-weight:800;
-  transition:.2s ease;
+  font-weight:900;
   border:1px solid transparent;
+  transition:.2s ease;
   cursor:pointer;
+  text-align:center;
 }
 
 .btn:hover{transform:translateY(-2px)}
 .btn-primary{
-  color:#06202a;
-  background:linear-gradient(135deg,var(--accent),var(--accent-2));
-  box-shadow:0 12px 32px rgba(100,231,255,.22);
+  background:linear-gradient(135deg, var(--accent), var(--accent-2));
+  color:#05202b;
+  box-shadow:0 14px 34px rgba(99,231,255,.2);
 }
+
 .btn-secondary{
   background:rgba(255,255,255,.04);
   border-color:rgba(255,255,255,.12);
   color:var(--text);
 }
 
+.btn-ghost{
+  background:rgba(99,231,255,.08);
+  border-color:rgba(99,231,255,.18);
+  color:#d4fbff;
+}
+
 .hero{
-  padding:84px 0 42px;
+  padding:86px 0 46px;
+  position:relative;
   overflow:hidden;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  width:560px;
+  height:560px;
+  right:-160px;
+  top:-120px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(99,231,255,.12), transparent 62%);
+  pointer-events:none;
+  z-index:0;
 }
 
 .hero-grid{
   display:grid;
-  grid-template-columns:1.05fr .95fr;
+  grid-template-columns:1fr 1fr;
   gap:34px;
   align-items:center;
 }
@@ -129,27 +188,27 @@ a{color:inherit;text-decoration:none}
   display:inline-flex;
   align-items:center;
   gap:10px;
-  border-radius:999px;
   padding:8px 14px;
+  border-radius:999px;
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.08);
   color:var(--accent);
-  font-weight:700;
   font-size:.9rem;
+  font-weight:800;
   margin-bottom:18px;
 }
 
 h1{
-  font-size:clamp(2.7rem, 6vw, 5.4rem);
-  line-height:.95;
-  letter-spacing:-.05em;
-  margin:0 0 16px;
+  margin:0 0 18px;
+  font-size:clamp(2.8rem, 6vw, 5.8rem);
+  line-height:.93;
+  letter-spacing:-.055em;
   max-width:760px;
 }
 
 .lead{
   margin:0;
-  max-width:700px;
+  max-width:710px;
   color:var(--muted);
   font-size:1.08rem;
 }
@@ -161,11 +220,28 @@ h1{
   margin-top:28px;
 }
 
+.hero-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:26px;
+}
+
+.strip-pill{
+  padding:9px 13px;
+  border-radius:999px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.09);
+  color:#d9f9ff;
+  font-size:.85rem;
+  font-weight:700;
+}
+
 .hero-stats{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:14px;
-  margin-top:30px;
+  margin-top:28px;
 }
 
 .stat{
@@ -178,9 +254,9 @@ h1{
 
 .stat strong{
   display:block;
-  font-size:1.4rem;
-  margin-bottom:6px;
+  font-size:1.35rem;
   letter-spacing:-.03em;
+  margin-bottom:6px;
 }
 
 .stat span{
@@ -188,33 +264,34 @@ h1{
   font-size:.92rem;
 }
 
-.hero-card{
+.visual-shell{
   position:relative;
-  border-radius:30px;
-  padding:22px;
   background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.04));
   border:1px solid rgba(255,255,255,.12);
+  border-radius:30px;
+  padding:20px;
   box-shadow:var(--shadow);
   overflow:hidden;
 }
 
-.hero-card::before{
+.visual-shell::before{
   content:"";
   position:absolute;
-  width:220px;
-  height:220px;
+  inset:auto auto -90px -90px;
+  width:260px;
+  height:260px;
   border-radius:50%;
-  background:radial-gradient(circle, rgba(100,231,255,.26), transparent 65%);
-  top:-80px;
-  left:-70px;
+  background:radial-gradient(circle, rgba(141,255,199,.16), transparent 68%);
   pointer-events:none;
 }
 
 .screen{
-  overflow:hidden;
+  position:relative;
   border-radius:22px;
-  border:1px solid rgba(255,255,255,.10);
-  background:#09121a;
+  overflow:hidden;
+  background:#07111a;
+  border:1px solid rgba(255,255,255,.1);
+  min-height:560px;
 }
 
 .screen-top{
@@ -234,66 +311,61 @@ h1{
 }
 
 .screen-body{
-  padding:20px;
-  display:grid;
-  gap:14px;
+  position:relative;
+  padding:22px;
+  min-height:calc(560px - 45px);
+  background:
+    radial-gradient(circle at 70% 20%, rgba(111,167,255,.2), transparent 20%),
+    radial-gradient(circle at 30% 80%, rgba(141,255,199,.14), transparent 18%),
+    linear-gradient(180deg, rgba(10,26,39,.95), rgba(6,17,26,.98));
 }
 
-.mini-card{
-  border-radius:18px;
-  padding:18px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08);
-}
-
-.mini-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-}
-
-.pill-row{
+.scan-art{
+  position:relative;
+  min-height:480px;
   display:flex;
-  flex-wrap:wrap;
-  gap:10px;
+  align-items:center;
+  justify-content:center;
 }
 
-.pill{
-  padding:8px 12px;
-  border-radius:999px;
-  font-size:.84rem;
-  font-weight:700;
-  color:#d7faff;
-  background:rgba(100,231,255,.1);
-  border:1px solid rgba(100,231,255,.16);
+.scan-art svg{
+  width:min(100%, 500px);
+  height:auto;
+  filter:drop-shadow(0 20px 50px rgba(0,0,0,.35));
 }
 
-section{padding:40px 0}
+.floating-badge{
+  position:absolute;
+  padding:12px 14px;
+  border-radius:18px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  backdrop-filter:blur(10px);
+  box-shadow:var(--shadow);
+  font-size:.86rem;
+  font-weight:800;
+  color:#e8fbff;
+}
+
+.badge-1{top:28px;left:18px}
+.badge-2{top:70px;right:20px}
+.badge-3{bottom:92px;left:20px}
+.badge-4{bottom:30px;right:20px}
+
+section{padding:42px 0}
 
 .section-title{
-  font-size:clamp(2rem,4vw,3.1rem);
-  line-height:1;
-  letter-spacing:-.04em;
   margin:0 0 12px;
+  font-size:clamp(2rem,4vw,3.2rem);
+  line-height:1;
+  letter-spacing:-.045em;
 }
 
 .section-copy{
-  margin:0 0 26px;
-  color:var(--muted);
+  margin:0 0 28px;
   max-width:760px;
+  color:var(--muted);
   font-size:1.02rem;
-}
-
-.grid-3{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
-}
-
-.grid-2{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:18px;
 }
 
 .card{
@@ -310,10 +382,23 @@ section{padding:40px 0}
   padding:7px 12px;
   border-radius:999px;
   background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.1);
   color:var(--accent);
   font-size:.84rem;
-  font-weight:800;
+  font-weight:900;
+  letter-spacing:.03em;
+}
+
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.grid-2{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
 }
 
 .demo-card{
@@ -324,12 +409,12 @@ section{padding:40px 0}
 }
 
 .demo-preview{
-  min-height:320px;
+  min-height:340px;
   border-radius:22px;
-  border:1px solid rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.1);
   padding:24px;
   background:
-    linear-gradient(135deg, rgba(100,231,255,.16), rgba(141,255,200,.08)),
+    linear-gradient(135deg, rgba(99,231,255,.15), rgba(141,255,199,.08)),
     rgba(255,255,255,.04);
   display:flex;
   flex-direction:column;
@@ -338,23 +423,23 @@ section{padding:40px 0}
 
 .demo-preview h3{
   margin:0 0 8px;
-  font-size:1.7rem;
+  font-size:1.8rem;
   letter-spacing:-.03em;
 }
 
 .demo-preview p{
   margin:0;
   color:rgba(255,255,255,.82);
-  max-width:460px;
+  max-width:470px;
 }
 
 .qr-box{
-  width:136px;
+  width:138px;
   aspect-ratio:1;
   border-radius:18px;
   background:
-    linear-gradient(90deg,#fff 12%,#e8fafe 12% 24%,#fff 24% 36%,#e8fafe 36% 48%,#fff 48% 60%,#e8fafe 60% 72%,#fff 72% 84%,#e8fafe 84%),
-    linear-gradient(#fff 12%,#e8fafe 12% 24%,#fff 24% 36%,#e8fafe 36% 48%,#fff 48% 60%,#e8fafe 60% 72%,#fff 72% 84%,#e8fafe 84%);
+    linear-gradient(90deg,#fff 12%,#e7fbff 12% 24%,#fff 24% 36%,#e7fbff 36% 48%,#fff 48% 60%,#e7fbff 60% 72%,#fff 72% 84%,#e7fbff 84%),
+    linear-gradient(#fff 12%,#e7fbff 12% 24%,#fff 24% 36%,#e7fbff 36% 48%,#fff 48% 60%,#e7fbff 60% 72%,#fff 72% 84%,#e7fbff 84%);
   background-blend-mode:multiply;
   border:8px solid #fff;
   box-shadow:0 18px 36px rgba(0,0,0,.22);
@@ -362,7 +447,8 @@ section{padding:40px 0}
 
 .demo-list,
 .feature-list,
-.package-list{
+.package-list,
+.proof-list{
   list-style:none;
   padding:0;
   margin:0;
@@ -372,7 +458,8 @@ section{padding:40px 0}
 
 .demo-list li,
 .feature-list li,
-.package-list li{
+.package-list li,
+.proof-list li{
   color:var(--muted);
   padding-left:20px;
   position:relative;
@@ -380,7 +467,8 @@ section{padding:40px 0}
 
 .demo-list li::before,
 .feature-list li::before,
-.package-list li::before{
+.package-list li::before,
+.proof-list li::before{
   content:"•";
   position:absolute;
   left:0;
@@ -390,7 +478,7 @@ section{padding:40px 0}
 
 .step-number{
   display:block;
-  font-size:2.15rem;
+  font-size:2.2rem;
   font-weight:900;
   color:var(--accent);
   letter-spacing:-.04em;
@@ -412,14 +500,14 @@ section{padding:40px 0}
 }
 
 .score-ring{
-  width:180px;
-  height:180px;
+  width:190px;
+  height:190px;
   margin:0 auto;
   border-radius:50%;
   display:grid;
   place-items:center;
   background:
-    conic-gradient(var(--accent) 0 75%, rgba(255,255,255,.08) 75% 100%);
+    conic-gradient(var(--accent) 0 78%, rgba(255,255,255,.08) 78% 100%);
   position:relative;
   box-shadow:0 20px 40px rgba(0,0,0,.22);
 }
@@ -437,7 +525,7 @@ section{padding:40px 0}
   position:relative;
   z-index:1;
   text-align:center;
-  font-size:2.2rem;
+  font-size:2.3rem;
   font-weight:900;
   letter-spacing:-.05em;
 }
@@ -446,8 +534,8 @@ section{padding:40px 0}
   display:block;
   font-size:.88rem;
   color:var(--muted);
-  margin-top:4px;
   letter-spacing:0;
+  margin-top:4px;
 }
 
 .score-bands{
@@ -490,24 +578,47 @@ section{padding:40px 0}
   margin-top:8px;
   padding:9px 12px;
   border-radius:999px;
-  background:rgba(141,255,200,.10);
+  background:rgba(141,255,200,.1);
   border:1px solid rgba(141,255,200,.18);
-  color:#dcffe9;
+  color:#deffeb;
   font-size:.84rem;
+  font-weight:900;
+}
+
+.proof-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:16px;
+}
+
+.mini-link{
+  display:inline-flex;
+  padding:10px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  color:#dffaff;
   font-weight:800;
+  font-size:.85rem;
+}
+
+.mini-link:hover{
+  background:rgba(99,231,255,.1);
+  border-color:rgba(99,231,255,.2);
 }
 
 .package-price{
   font-size:2rem;
   font-weight:900;
-  margin:8px 0 14px;
   letter-spacing:-.04em;
+  margin:8px 0 14px;
 }
 
 .featured{
   position:relative;
-  background:linear-gradient(180deg, rgba(100,231,255,.12), rgba(255,255,255,.05));
-  border-color:rgba(100,231,255,.25);
+  background:linear-gradient(180deg, rgba(99,231,255,.12), rgba(255,255,255,.05));
+  border-color:rgba(99,231,255,.22);
   transform:translateY(-6px);
 }
 
@@ -521,33 +632,53 @@ section{padding:40px 0}
   color:#06202a;
   font-size:.76rem;
   font-weight:900;
-  text-transform:uppercase;
   letter-spacing:.05em;
+  text-transform:uppercase;
+}
+
+.logo-wall{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-top:20px;
+}
+
+.logo-chip{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:76px;
+  border-radius:20px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  color:#dcf9ff;
+  font-weight:900;
+  letter-spacing:.08em;
 }
 
 .cta{
-  padding:56px 0 80px;
+  padding:58px 0 84px;
 }
 
 .cta-box{
   position:relative;
   overflow:hidden;
-  border-radius:30px;
-  padding:36px;
+  border-radius:32px;
+  padding:38px;
+  text-align:center;
   background:
-    radial-gradient(circle at top right, rgba(141,255,200,.16), transparent 24%),
-    radial-gradient(circle at left center, rgba(100,231,255,.20), transparent 28%),
+    radial-gradient(circle at top right, rgba(141,255,200,.14), transparent 26%),
+    radial-gradient(circle at left center, rgba(99,231,255,.2), transparent 30%),
     linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
   border:1px solid rgba(255,255,255,.12);
   box-shadow:var(--shadow);
-  text-align:center;
 }
 
 .cta-box h2{
   margin:0 0 12px;
-  font-size:clamp(2rem, 4vw, 3.5rem);
+  font-size:clamp(2.1rem,4vw,3.6rem);
   line-height:.97;
-  letter-spacing:-.04em;
+  letter-spacing:-.045em;
 }
 
 .cta-box p{
@@ -564,12 +695,13 @@ section{padding:40px 0}
   font-size:.92rem;
 }
 
-@media (max-width: 980px){
+@media (max-width: 1040px){
   .hero-grid,
   .demo-card,
   .tas-wrap,
   .grid-3,
-  .grid-2{
+  .grid-2,
+  .logo-wall{
     grid-template-columns:1fr;
   }
 
@@ -586,37 +718,18 @@ section{padding:40px 0}
   }
 }
 
-@media (max-width: 640px){
-  .hero{
-    padding-top:62px;
-  }
-
-  .container{
-    width:min(calc(100% - 20px), var(--max));
-  }
-
-  .hero-card,
-  .card,
-  .cta-box{
-    padding:20px;
-  }
-
-  .btn{
-    width:100%;
-  }
-
-  .hero-actions{
-    flex-direction:column;
-  }
-
-  .mini-grid{
-    grid-template-columns:1fr;
-  }
-
-  .score-ring{
-    width:160px;
-    height:160px;
-  }
+@media (max-width: 680px){
+  .hero{padding-top:62px}
+  .container{width:min(calc(100% - 20px), var(--max))}
+  .btn{width:100%}
+  .hero-actions{flex-direction:column}
+  .cta-box,.card,.visual-shell{padding:20px}
+  .screen{min-height:520px}
+  .floating-badge{font-size:.78rem;padding:10px 12px}
+  .badge-1{top:16px;left:12px}
+  .badge-2{top:66px;right:12px}
+  .badge-3{bottom:86px;left:12px}
+  .badge-4{bottom:22px;right:12px}
 }
 
   </style>
@@ -624,13 +737,30 @@ section{padding:40px 0}
 <body>  <nav class="nav">
     <div class="container nav-inner">
       <a href="#top" class="brand">
-        <div class="brand-mark">SC</div>
-        <div>SCANCRAFT</div>
+        <div class="brand-logo">
+          <svg viewBox="0 0 100 100" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#63e7ff"/>
+                <stop offset="100%" stop-color="#8dffc7"/>
+              </linearGradient>
+            </defs>
+            <rect width="100" height="100" rx="22" fill="#07151f"/>
+            <circle cx="50" cy="50" r="28" fill="none" stroke="url(#g1)" stroke-width="6"/>
+            <path d="M28 50h44" stroke="url(#g1)" stroke-width="6" stroke-linecap="round"/>
+            <path d="M50 28v44" stroke="#ffffff" stroke-opacity=".18" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="50" cy="50" r="8" fill="url(#g1)"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <strong>SCANCRAFT</strong>
+          <span>DIGITAL EXPERIENCE LAYER</span>
+        </div>
       </a>  <div class="nav-links">
     <a href="#demo">Demo</a>
     <a href="#how">How It Works</a>
-    <a href="#tas">TAS</a>
-    <a href="#cases">Proof</a>
+    <a href="#tas">T.A.S.</a>
+    <a href="#proof">Proof</a>
     <a href="#pricing">Pricing</a>
   </div>
 
@@ -640,76 +770,152 @@ section{padding:40px 0}
   </nav>  <header class="hero" id="top">
     <div class="container hero-grid">
       <div>
-        <div class="eyebrow">QR-powered digital experiences for real businesses</div>
-        <h1>Turn Every Customer Interaction Into an Experience</h1>
+        <div class="eyebrow">QR-powered digital leverage for modern local business</div>
+        <h1>Turn Attention Into Experience. Turn Experience Into Action.</h1>
         <p class="lead">
-          ScanCraft helps local businesses layer storytelling, mobile experiences, offers,
-          menus, products, and conversion systems on top of the spaces they already own.
-          We don’t just build pages. We build a digital edge.
+          ScanCraft builds branded digital layers that sit on top of real-world businesses.
+          Menus, products, spaces, cards, counters, events, packaging, promotions — all made
+          more interactive, memorable, and conversion-ready through one scan.
         </p>    <div class="hero-actions">
-      <a href="#demo" class="btn btn-primary">View Live System</a>
+      <a href="#demo" class="btn btn-primary">See Live Demo Paths</a>
       <a href="#tas" class="btn btn-secondary">Get Your ScanCraft Score</a>
+    </div>
+
+    <div class="hero-strip">
+      <span class="strip-pill">Restaurants</span>
+      <span class="strip-pill">Lounges</span>
+      <span class="strip-pill">Retail</span>
+      <span class="strip-pill">Events</span>
+      <span class="strip-pill">Product Brands</span>
     </div>
 
     <div class="hero-stats">
       <div class="stat">
-        <strong>Mobile-First</strong>
-        <span>Built for the way customers actually engage today.</span>
+        <strong>Scan Once</strong>
+        <span>Instant access from a card, menu, package, table, or display.</span>
       </div>
       <div class="stat">
-        <strong>QR-Activated</strong>
-        <span>Instant access from cards, menus, counters, products, and signage.</span>
+        <strong>Feel the Brand</strong>
+        <span>Customers step into a branded mobile experience, not plain text.</span>
       </div>
       <div class="stat">
-        <strong>Conversion-Focused</strong>
-        <span>Designed to increase attention, perceived value, and action.</span>
+        <strong>Drive Action</strong>
+        <span>Better attention, stronger trust, higher perceived value, more response.</span>
       </div>
     </div>
   </div>
 
-  <div class="hero-card">
+  <div class="visual-shell">
     <div class="screen">
       <div class="screen-top">
         <div class="dot"></div>
         <div class="dot"></div>
         <div class="dot"></div>
       </div>
+
       <div class="screen-body">
-        <div class="mini-card">
-          <div class="label">Live Experience Layer</div>
-          <h3 style="margin:0 0 8px; font-size:1.4rem; letter-spacing:-.03em;">What ScanCraft Creates</h3>
-          <p style="margin:0; color:var(--muted);">
-            A customer scans once — then enters a branded story, product showcase,
-            promotion, menu, media gallery, or conversion funnel built for your business.
-          </p>
-        </div>
+        <div class="floating-badge badge-1">QR Activated</div>
+        <div class="floating-badge badge-2">Mobile First</div>
+        <div class="floating-badge badge-3">Story + Conversion</div>
+        <div class="floating-badge badge-4">Built To Close</div>
 
-        <div class="mini-grid">
-          <div class="mini-card">
-            <strong style="display:block; margin-bottom:8px;">Customer Journey</strong>
-            <div class="pill-row">
-              <span class="pill">Scan</span>
-              <span class="pill">Engage</span>
-              <span class="pill">Trust</span>
-              <span class="pill">Act</span>
-            </div>
-          </div>
-          <div class="mini-card">
-            <strong style="display:block; margin-bottom:8px;">Use Cases</strong>
-            <div class="pill-row">
-              <span class="pill">Restaurants</span>
-              <span class="pill">Lounges</span>
-              <span class="pill">Retail</span>
-              <span class="pill">Events</span>
-            </div>
-          </div>
-        </div>
+        <div class="scan-art">
+          <svg viewBox="0 0 760 560" xmlns="http://www.w3.org/2000/svg" aria-label="ScanCraft hero visual">
+            <defs>
+              <linearGradient id="lineGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#63e7ff"/>
+                <stop offset="100%" stop-color="#8dffc7"/>
+              </linearGradient>
+              <linearGradient id="phoneGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0f2331"/>
+                <stop offset="100%" stop-color="#091722"/>
+              </linearGradient>
+              <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#63e7ff" stop-opacity=".8"/>
+                <stop offset="100%" stop-color="#63e7ff" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
 
-        <div class="mini-card">
-          <strong style="display:block; margin-bottom:6px;">The edge:</strong>
-          <span style="color:var(--muted);">
-            Anyone can hand over a business card. ScanCraft hands over an experience.
-          </span>
+            <circle cx="380" cy="285" r="180" fill="url(#coreGlow)" opacity=".55"/>
+            <circle cx="380" cy="285" r="145" fill="none" stroke="url(#lineGlow)" stroke-width="3" opacity=".4"/>
+            <circle cx="380" cy="285" r="110" fill="none" stroke="url(#lineGlow)" stroke-width="2" opacity=".32"/>
+            <circle cx="380" cy="285" r="70" fill="none" stroke="url(#lineGlow)" stroke-width="2" opacity=".28"/>
+
+            <rect x="270" y="112" width="220" height="336" rx="34" fill="url(#phoneGlow)" stroke="rgba(255,255,255,.15)" stroke-width="2"/>
+            <rect x="290" y="145" width="180" height="250" rx="20" fill="#0d2230" stroke="rgba(255,255,255,.08)" stroke-width="2"/>
+
+            <rect x="308" y="164" width="144" height="30" rx="12" fill="rgba(99,231,255,.12)" stroke="rgba(99,231,255,.22)" stroke-width="1.5"/>
+            <rect x="308" y="210" width="66" height="66" rx="14" fill="#ffffff"/>
+            <rect x="386" y="210" width="66" height="66" rx="14" fill="rgba(255,255,255,.08)"/>
+            <rect x="308" y="290" width="144" height="20" rx="10" fill="rgba(255,255,255,.10)"/>
+            <rect x="308" y="324" width="120" height="16" rx="8" fill="rgba(255,255,255,.08)"/>
+            <rect x="308" y="356" width="144" height="18" rx="9" fill="url(#lineGlow)" opacity=".75"/>
+
+            <rect x="325" y="227" width="10" height="10" fill="#0a1d2a"/>
+            <rect x="337" y="227" width="10" height="10" fill="#0a1d2a"/>
+            <rect x="349" y="227" width="10" height="10" fill="#0a1d2a"/>
+            <rect x="325" y="239" width="10" height="10" fill="#0a1d2a"/>
+            <rect x="349" y="239" width="10" height="10" fill="#0a1d2a"/>
+            <rect x="325" y="251" width="10" height="10" fill="#0a1d2a"/>
+            <rect x="337" y="251" width="10" height="10" fill="#0a1d2a"/>
+            <rect x="349" y="251" width="10" height="10" fill="#0a1d2a"/>
+
+            <path d="M126 132 L250 206" stroke="url(#lineGlow)" stroke-width="3" opacity=".72"/>
+            <path d="M110 290 L248 290" stroke="url(#lineGlow)" stroke-width="3" opacity=".72"/>
+            <path d="M124 436 L254 366" stroke="url(#lineGlow)" stroke-width="3" opacity=".72"/>
+
+            <path d="M510 206 L636 132" stroke="url(#lineGlow)" stroke-width="3" opacity=".72"/>
+            <path d="M512 290 L648 290" stroke="url(#lineGlow)" stroke-width="3" opacity=".72"/>
+            <path d="M506 366 L634 436" stroke="url(#lineGlow)" stroke-width="3" opacity=".72"/>
+
+            <g>
+              <rect x="52" y="98" width="70" height="70" rx="16" fill="#ffffff"/>
+              <rect x="68" y="114" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="80" y="114" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="92" y="114" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="68" y="126" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="92" y="126" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="68" y="138" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="80" y="138" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="92" y="138" width="10" height="10" fill="#0a1d2a"/>
+            </g>
+
+            <g>
+              <rect x="42" y="258" width="104" height="64" rx="18" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.12)"/>
+              <text x="58" y="286" fill="#eef8ff" font-size="16" font-family="Arial" font-weight="700">MENU</text>
+              <text x="58" y="307" fill="#9cb4c7" font-size="12" font-family="Arial">story • offers • CTA</text>
+            </g>
+
+            <g>
+              <rect x="50" y="404" width="112" height="64" rx="18" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.12)"/>
+              <text x="66" y="432" fill="#eef8ff" font-size="16" font-family="Arial" font-weight="700">BRAND</text>
+              <text x="66" y="453" fill="#9cb4c7" font-size="12" font-family="Arial">vibe • trust • polish</text>
+            </g>
+
+            <g>
+              <rect x="638" y="98" width="70" height="70" rx="16" fill="#ffffff"/>
+              <rect x="654" y="114" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="666" y="114" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="678" y="114" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="654" y="126" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="678" y="126" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="654" y="138" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="666" y="138" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="678" y="138" width="10" height="10" fill="#0a1d2a"/>
+            </g>
+
+            <g>
+              <rect x="612" y="258" width="112" height="64" rx="18" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.12)"/>
+              <text x="630" y="286" fill="#eef8ff" font-size="16" font-family="Arial" font-weight="700">SOCIAL</text>
+              <text x="630" y="307" fill="#9cb4c7" font-size="12" font-family="Arial">proof • media • flow</text>
+            </g>
+
+            <g>
+              <rect x="598" y="404" width="138" height="64" rx="18" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.12)"/>
+              <text x="616" y="432" fill="#eef8ff" font-size="16" font-family="Arial" font-weight="700">CONVERSION</text>
+              <text x="616" y="453" fill="#9cb4c7" font-size="12" font-family="Arial">click • call • buy • book</text>
+            </g>
+          </svg>
         </div>
       </div>
     </div>
@@ -718,37 +924,42 @@ section{padding:40px 0}
 
   </header>  <section id="demo">
     <div class="container">
-      <h2 class="section-title">Show, Don’t Tell</h2>
+      <h2 class="section-title">Live Demo Paths</h2>
       <p class="section-copy">
-        ScanCraft works best when a business can see it instantly. That’s why every pitch can lead
-        directly into a live, mobile-first demo experience.
+        ScanCraft closes harder when people can feel it instantly. Here’s the type of digital
+        layer a business steps into after one scan.
       </p>  <div class="card demo-card">
     <div class="demo-preview">
       <div>
-        <div class="label">Demo Experience</div>
-        <h3>Scan. Enter. Feel the difference.</h3>
+        <div class="label">Experience Layer</div>
+        <h3>Not a link. A branded moment.</h3>
         <p>
-          Your customer doesn’t land on plain text. They land inside a branded moment that
-          feels intentional, modern, and worth exploring.
+          The difference is emotional and practical. Customers don’t just read about the business.
+          They enter a sharpened experience designed to hold attention and move them toward action.
         </p>
       </div>
 
       <div style="display:flex; align-items:end; justify-content:space-between; gap:16px; flex-wrap:wrap;">
         <div class="qr-box"></div>
-        <a href="#" class="btn btn-primary">Launch Demo</a>
+        <a href="https://jessepinkman519-dev.github.io/Fischtacos/" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Launch Farm &amp; Sea Demo</a>
       </div>
     </div>
 
     <div class="card" style="background:rgba(255,255,255,.03); box-shadow:none;">
-      <div class="label">What this can include</div>
+      <div class="label">What can be layered in</div>
       <ul class="demo-list">
-        <li>Interactive product or menu highlights</li>
-        <li>Chef, owner, or brand story video sections</li>
-        <li>Promotions, loyalty hooks, or event features</li>
-        <li>Instagram or social proof integration</li>
-        <li>Mobile call-to-action buttons built to convert</li>
-        <li>QR-driven business cards, table cards, and packaging links</li>
+        <li>Owner or brand story sections</li>
+        <li>Product or menu showcases with premium feel</li>
+        <li>Instagram or content-driven trust layers</li>
+        <li>Offers, events, loyalty hooks, or promotions</li>
+        <li>QR business cards that open into a whole system</li>
+        <li>Calls to action designed to get a real response</li>
       </ul>
+
+      <div class="proof-links">
+        <a class="mini-link" href="https://jessepinkman519-dev.github.io/Fischtacos/" target="_blank" rel="noopener noreferrer">Farm &amp; Sea Demo</a>
+        <a class="mini-link" href="https://jessepinkman519-dev.github.io/bandon-coffe-demo/" target="_blank" rel="noopener noreferrer">Bandon Coffee Demo</a>
+      </div>
     </div>
   </div>
 </div>
@@ -757,33 +968,33 @@ section{padding:40px 0}
     <div class="container">
       <h2 class="section-title">How It Works</h2>
       <p class="section-copy">
-        Simple on the surface. Powerful underneath. The goal is to remove friction and create a path
-        from curiosity to action.
+        Clean on the surface. Lethal underneath. The system is built to remove friction and give a business
+        a modern customer-facing edge without requiring a full rebuild.
       </p>  <div class="grid-3">
     <div class="card">
       <span class="step-number">01</span>
       <h3 style="margin:0 0 10px;">Scan</h3>
       <p style="margin:0; color:var(--muted);">
-        A customer scans a QR from a business card, menu, product label, table sign,
-        front counter, flyer, window, or display.
+        A customer scans from a card, menu, product label, counter display, table tent,
+        poster, package, or event asset.
       </p>
     </div>
 
     <div class="card">
       <span class="step-number">02</span>
-      <h3 style="margin:0 0 10px;">Experience</h3>
+      <h3 style="margin:0 0 10px;">Enter</h3>
       <p style="margin:0; color:var(--muted);">
-        Instead of generic info, they enter a fast, branded, mobile-optimized digital layer
-        designed around your business and your goals.
+        They land inside a mobile-first branded layer designed around identity, storytelling,
+        credibility, and customer curiosity.
       </p>
     </div>
 
     <div class="card">
       <span class="step-number">03</span>
-      <h3 style="margin:0 0 10px;">Convert</h3>
+      <h3 style="margin:0 0 10px;">Act</h3>
       <p style="margin:0; color:var(--muted);">
-        More attention. Better perceived value. More clicks, actions, inquiries,
-        purchases, and real-world follow-through.
+        They click, inquire, follow, book, buy, engage, or remember the business more clearly
+        because the experience actually left a mark.
       </p>
     </div>
   </div>
@@ -793,67 +1004,184 @@ section{padding:40px 0}
     <div class="container">
       <h2 class="section-title">ScanCraft T.A.S.</h2>
       <p class="section-copy">
-        The Target Acquisition System is how ScanCraft evaluates a business’s current digital leverage,
-        identifies missed opportunities, and scores overall upgrade potential.
+        The Target Acquisition System evaluates how much leverage a business is currently leaving on the table,
+        then maps the opportunity to upgrade its digital surface and customer journey.
       </p>  <div class="tas-wrap">
     <div class="card score-panel">
       <div>
         <div class="label">Target Score Preview</div>
         <div class="score-ring">
-          <div class="score-number">7.5<small>/ 10 Potential</small></div>
+          <div class="score-number">7.8<small>/ 10 opportunity</small></div>
         </div>
       </div>
 
       <div class="score-bands">
         <div class="band">
-          <strong>1–3 | Underleveraged</strong>
-          <span>Low digital engagement, weak presentation, missed trust and conversion opportunities.</span>
+          <strong>1–3 | Weak Surface</strong>
+          <span>Minimal digital leverage, weak presentation, low engagement path, missed trust signals.</span>
         </div>
         <div class="band">
-          <strong>4–7 | Opportunity Zone</strong>
-          <span>Has value, but lacks digital layering, polish, customer journey clarity, or retention tools.</span>
+          <strong>4–7 | Upgrade Zone</strong>
+          <span>Good bones, but underdeveloped digital experience, customer journey, or conversion layer.</span>
         </div>
         <div class="band">
-          <strong>8–10 | High Leverage</strong>
-          <span>Strong digital surface, aligned messaging, and clear systems that amplify customer experience.</span>
+          <strong>8–10 | High Leverage Build</strong>
+          <span>Strong digital positioning, polished experience, clear action path, scalable business perception.</span>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="label">What TAS Looks At</div>
+      <div class="label">What T.A.S. Checks</div>
       <ul class="feature-list">
-        <li>Digital first impression and credibility</li>
-        <li>Mobile optimization and ease of engagement</li>
-        <li>Brand experience quality and uniqueness</li>
-        <li>Customer journey clarity from attention to action</li>
-        <li>Social, content, and conversion readiness</li>
-        <li>Missed leverage points hiding in plain sight</li>
+        <li>First digital impression and authority level</li>
+        <li>Mobile readiness and customer accessibility</li>
+        <li>Brand atmosphere, uniqueness, and memorability</li>
+        <li>Conversion clarity from curiosity to action</li>
+        <li>Social integration and proof opportunities</li>
+        <li>Hidden leverage points in the current business setup</li>
       </ul>
 
       <div style="height:16px;"></div>
 
-      <a href="#contact" class="btn btn-primary">Request Your ScanCraft Score</a>
+      <a href="mailto:hiddenleverage.ai@gmail.com?subject=ScanCraft%20TAS%20Request" class="btn btn-primary">Request Your ScanCraft Score</a>
     </div>
   </div>
 </div>
 
-  </section>  <section id="cases">
+  </section>  <section id="proof">
     <div class="container">
-      <h2 class="section-title">Built for Real Businesses</h2>
+      <h2 class="section-title">Built to Be Felt</h2>
       <p class="section-copy">
-        ScanCraft isn’t theory. It’s a practical system designed to make local businesses feel more modern,
-        more memorable, and more clickable.
+        These are the kinds of businesses ScanCraft is designed to sharpen — not by replacing what they are,
+        but by amplifying what already makes them worth noticing.
       </p>  <div class="grid-3">
     <div class="card case-card">
       <div class="label">Restaurant Demo</div>
       <h3>Farm &amp; Sea</h3>
       <p>
-        Premium mobile food experience concept built to elevate menu storytelling,
-        visuals, and customer engagement beyond a static menu.
+        Premium mobile food experience concept designed to elevate product storytelling,
+        showcase menu energy, and create a more modern customer touchpoint.
       </p>
-      <span class="result-pill">Higher perceived value</span>
+      <ul class="proof-list">
+        <li>Premium menu presentation</li>
+        <li>Stronger perceived value</li>
+        <li>Better scan-to-engagement experience</li>
+      </ul>
+      <span class="result-pill">Live demo ready</span>
+      <div class="proof-links">
+        <a class="mini-link" href="https://jessepinkman519-dev.github.io/Fischtacos/" target="_blank" rel="noopener noreferrer">Open Demo</a>
+      </div>
     </div>
 
-    <div class="ca
-  
+    <div class="card case-card">
+      <div class="label">Lounge Concept</div>
+      <h3>Gemini Lounge</h3>
+      <p>
+        Nightlife-facing digital atmosphere build focused on vibe, brand feel,
+        and giving the business a modern edge customers can actually interact with.
+      </p>
+      <ul class="proof-list">
+        <li>Brand atmosphere enhancement</li>
+        <li>Modern nightlife positioning</li>
+        <li>Social and engagement potential</li>
+      </ul>
+      <span class="result-pill">Concept system built</span>
+    </div>
+
+    <div class="card case-card">
+      <div class="label">Cafe Demo</div>
+      <h3>Bandon Coffee</h3>
+      <p>
+        Coffee experience concept centered around mobile polish, visual identity,
+        and a cleaner customer-facing digital layer that feels more current.
+      </p>
+      <ul class="proof-list">
+        <li>Cleaner digital authority</li>
+        <li>Improved customer presentation</li>
+        <li>Sharpened first impression</li>
+      </ul>
+      <span class="result-pill">Live demo ready</span>
+      <div class="proof-links">
+        <a class="mini-link" href="https://jessepinkman519-dev.github.io/bandon-coffe-demo/" target="_blank" rel="noopener noreferrer">Open Demo</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="logo-wall">
+    <div class="logo-chip">SCAN</div>
+    <div class="logo-chip">STORY</div>
+    <div class="logo-chip">VIBE</div>
+    <div class="logo-chip">CONVERT</div>
+  </div>
+</div>
+
+  </section>  <section id="pricing">
+    <div class="container">
+      <h2 class="section-title">Simple Packages. Serious Leverage.</h2>
+      <p class="section-copy">
+        Start with the right layer for the business. Expand into deeper systems when it makes sense.
+      </p>  <div class="grid-3">
+    <div class="card package-card">
+      <div class="label">Starter</div>
+      <h3>Launch Layer</h3>
+      <div class="package-price">$250+</div>
+      <p>Fast entry point for businesses that need a professional digital layer without overcomplicating it.</p>
+      <ul class="package-list">
+        <li>Single-page experience</li>
+        <li>QR connection setup</li>
+        <li>Basic call-to-action flow</li>
+        <li>Fast deployment</li>
+      </ul>
+    </div>
+
+    <div class="card package-card featured">
+      <div class="featured-badge">Most Popular</div>
+      <div class="label">Growth</div>
+      <h3>Brand Experience Build</h3>
+      <div class="package-price">$500+</div>
+      <p>Best for businesses that need stronger visual identity, more engagement, and a better customer-facing digital feel.</p>
+      <ul class="package-list">
+        <li>Enhanced branded mobile experience</li>
+        <li>Story, media, and trust sections</li>
+        <li>Offer or conversion positioning</li>
+        <li>Higher-end presentation polish</li>
+      </ul>
+    </div>
+
+    <div class="card package-card">
+      <div class="label">Authority</div>
+      <h3>Full Leverage System</h3>
+      <div class="package-price">Custom</div>
+      <p>For builds that need deeper integration, multiple entry points, stronger authority, and long-term positioning.</p>
+      <ul class="package-list">
+        <li>Custom digital ecosystem</li>
+        <li>Multi-page or multi-path structure</li>
+        <li>T.A.S. analysis and strategy layer</li>
+        <li>Branded asset integration</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+  </section>  <section class="cta" id="contact">
+    <div class="container">
+      <div class="cta-box">
+        <div class="label">Ready to make your business hit harder?</div>
+        <h2>Build the Digital Layer Your Business Should’ve Had Already</h2>
+        <p>
+          Whether you want a branded QR experience, a live demo, or a full ScanCraft score,
+          this is where the upgrade begins.
+        </p>
+        <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+          <a href="mailto:hiddenleverage.ai@gmail.com?subject=ScanCraft%20Inquiry" class="btn btn-primary">Email ScanCraft</a>
+          <a href="https://jessepinkman519-dev.github.io/Fischtacos/" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">View Live Demo</a>
+        </div>
+      </div>
+    </div>
+  </section>  <div class="footer">
+    <div class="container">
+      ScanCraft © 2026 · QR-powered digital experiences for modern local businesses
+    </div>
+  </div></body>
+</html>
