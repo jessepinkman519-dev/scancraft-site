@@ -2,28 +2,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ScanCraft | QR-Powered Digital Experiences</title>
+  <title>ScanCraft | Digital Experience Layer</title>
   <meta
     name="description"
-    content="ScanCraft builds QR-powered digital experiences for local businesses — transforming menus, products, spaces, and customer interactions into branded conversion systems."
+    content="ScanCraft builds premium QR-powered digital experiences for businesses, products, packaging, menus, and real-world customer touchpoints."
   />
   <style>
     :root{
       --bg:#041019;
-      --bg-2:#081623;
-      --bg-3:#0d2131;
+      --bg-2:#081722;
+      --bg-3:#0c2130;
       --panel:rgba(255,255,255,.06);
-      --panel-2:rgba(255,255,255,.1);
-      --line:rgba(255,255,255,.1);
+      --panel-2:rgba(255,255,255,.09);
+      --line:rgba(255,255,255,.10);
+      --line-2:rgba(99,231,255,.20);
       --text:#eef8ff;
-      --muted:#9cb4c7;
+      --muted:#9eb4c6;
       --accent:#63e7ff;
       --accent-2:#8dffc7;
       --accent-3:#6fa7ff;
-      --dark:#06131d;
+      --success:#a8ffd8;
+      --danger:#ff8a8a;
+      --dark:#05131d;
       --shadow:0 24px 70px rgba(0,0,0,.38);
+      --shadow-2:0 20px 40px rgba(0,0,0,.25);
       --radius:26px;
-      --max:1200px;
+      --radius-sm:18px;
+      --max:1220px;
     }*{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
@@ -35,7 +40,7 @@ body{
     radial-gradient(circle at 10% 8%, rgba(99,231,255,.18), transparent 22%),
     radial-gradient(circle at 92% 14%, rgba(141,255,199,.12), transparent 18%),
     radial-gradient(circle at 75% 80%, rgba(111,167,255,.1), transparent 18%),
-    linear-gradient(180deg, #031019 0%, #061520 30%, #081925 60%, #04111a 100%);
+    linear-gradient(180deg, #031019 0%, #061520 28%, #081925 58%, #04111a 100%);
   overflow-x:hidden;
 }
 
@@ -47,9 +52,27 @@ body::before{
   background-image:
     linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-  background-size:36px 36px;
-  mask-image:linear-gradient(180deg, rgba(255,255,255,.45), transparent 80%);
+  background-size:38px 38px;
+  mask-image:linear-gradient(180deg, rgba(255,255,255,.45), transparent 82%);
   z-index:0;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(99,231,255,.04), transparent 18%),
+    radial-gradient(circle at 80% 30%, rgba(141,255,199,.04), transparent 18%),
+    radial-gradient(circle at 50% 80%, rgba(111,167,255,.03), transparent 20%);
+  z-index:0;
+  animation: pulseGlow 8s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow{
+  from{opacity:.7;transform:scale(1)}
+  to{opacity:1;transform:scale(1.02)}
 }
 
 a{color:inherit;text-decoration:none}
@@ -67,8 +90,14 @@ img{max-width:100%;display:block}
   top:0;
   z-index:1000;
   backdrop-filter:blur(16px);
-  background:rgba(4,16,25,.76);
+  background:rgba(4,16,25,.72);
   border-bottom:1px solid rgba(255,255,255,.06);
+  transition:.25s ease;
+}
+
+.nav.scrolled{
+  background:rgba(4,16,25,.9);
+  box-shadow:0 10px 30px rgba(0,0,0,.22);
 }
 
 .nav-inner{
@@ -85,34 +114,39 @@ img{max-width:100%;display:block}
   gap:14px;
   font-weight:900;
   letter-spacing:.06em;
+  min-width:0;
 }
 
 .brand-logo{
-  width:48px;
-  height:48px;
-  border-radius:15px;
+  width:50px;
+  height:50px;
+  border-radius:16px;
   overflow:hidden;
+  border:1px solid rgba(255,255,255,.10);
   box-shadow:0 12px 30px rgba(99,231,255,.18);
-  border:1px solid rgba(255,255,255,.1);
   flex:0 0 auto;
+  transform:translateZ(0);
 }
 
 .brand-text{
   display:flex;
   flex-direction:column;
   line-height:1;
+  min-width:0;
 }
 
 .brand-text strong{
   font-size:1rem;
-  letter-spacing:.12em;
+  letter-spacing:.14em;
+  white-space:nowrap;
 }
 
 .brand-text span{
-  font-size:.72rem;
+  font-size:.7rem;
   color:var(--muted);
-  margin-top:4px;
+  margin-top:5px;
   letter-spacing:.16em;
+  white-space:nowrap;
 }
 
 .nav-links{
@@ -120,10 +154,27 @@ img{max-width:100%;display:block}
   align-items:center;
   gap:18px;
   color:var(--muted);
-  font-size:.95rem;
+  font-size:.94rem;
+}
+
+.nav-links a{
+  position:relative;
+  transition:.2s ease;
 }
 
 .nav-links a:hover{color:var(--text)}
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-8px;
+  width:0;
+  height:2px;
+  background:linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition:.2s ease;
+  border-radius:999px;
+}
+.nav-links a:hover::after{width:100%}
 
 .btn{
   display:inline-flex;
@@ -137,13 +188,18 @@ img{max-width:100%;display:block}
   transition:.2s ease;
   cursor:pointer;
   text-align:center;
+  min-height:52px;
 }
 
-.btn:hover{transform:translateY(-2px)}
+.btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 24px rgba(0,0,0,.18);
+}
+
 .btn-primary{
   background:linear-gradient(135deg, var(--accent), var(--accent-2));
   color:#05202b;
-  box-shadow:0 14px 34px rgba(99,231,255,.2);
+  box-shadow:0 14px 34px rgba(99,231,255,.22);
 }
 
 .btn-secondary{
@@ -159,7 +215,7 @@ img{max-width:100%;display:block}
 }
 
 .hero{
-  padding:86px 0 46px;
+  padding:88px 0 48px;
   position:relative;
   overflow:hidden;
 }
@@ -167,19 +223,19 @@ img{max-width:100%;display:block}
 .hero::after{
   content:"";
   position:absolute;
-  width:560px;
-  height:560px;
-  right:-160px;
-  top:-120px;
+  width:620px;
+  height:620px;
+  right:-180px;
+  top:-140px;
   border-radius:50%;
-  background:radial-gradient(circle, rgba(99,231,255,.12), transparent 62%);
+  background:radial-gradient(circle, rgba(99,231,255,.12), transparent 64%);
   pointer-events:none;
   z-index:0;
 }
 
 .hero-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:1.02fr .98fr;
   gap:34px;
   align-items:center;
 }
@@ -196,13 +252,14 @@ img{max-width:100%;display:block}
   font-size:.9rem;
   font-weight:800;
   margin-bottom:18px;
+  box-shadow:var(--shadow-2);
 }
 
 h1{
   margin:0 0 18px;
-  font-size:clamp(2.8rem, 6vw, 5.8rem);
-  line-height:.93;
-  letter-spacing:-.055em;
+  font-size:clamp(2.9rem, 6vw, 6rem);
+  line-height:.92;
+  letter-spacing:-.058em;
   max-width:760px;
 }
 
@@ -235,6 +292,7 @@ h1{
   color:#d9f9ff;
   font-size:.85rem;
   font-weight:700;
+  box-shadow:var(--shadow-2);
 }
 
 .hero-stats{
@@ -291,7 +349,7 @@ h1{
   overflow:hidden;
   background:#07111a;
   border:1px solid rgba(255,255,255,.1);
-  min-height:560px;
+  min-height:600px;
 }
 
 .screen-top{
@@ -313,7 +371,7 @@ h1{
 .screen-body{
   position:relative;
   padding:22px;
-  min-height:calc(560px - 45px);
+  min-height:calc(600px - 45px);
   background:
     radial-gradient(circle at 70% 20%, rgba(111,167,255,.2), transparent 20%),
     radial-gradient(circle at 30% 80%, rgba(141,255,199,.14), transparent 18%),
@@ -322,16 +380,22 @@ h1{
 
 .scan-art{
   position:relative;
-  min-height:480px;
+  min-height:520px;
   display:flex;
   align-items:center;
   justify-content:center;
 }
 
 .scan-art svg{
-  width:min(100%, 500px);
+  width:min(100%, 520px);
   height:auto;
   filter:drop-shadow(0 20px 50px rgba(0,0,0,.35));
+  animation: floatSoft 6s ease-in-out infinite;
+}
+
+@keyframes floatSoft{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
 }
 
 .floating-badge{
@@ -345,18 +409,24 @@ h1{
   font-size:.86rem;
   font-weight:800;
   color:#e8fbff;
+  animation: badgeBob 5s ease-in-out infinite;
+}
+
+@keyframes badgeBob{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-5px)}
 }
 
 .badge-1{top:28px;left:18px}
-.badge-2{top:70px;right:20px}
-.badge-3{bottom:92px;left:20px}
-.badge-4{bottom:30px;right:20px}
+.badge-2{top:70px;right:20px;animation-delay:.5s}
+.badge-3{bottom:92px;left:20px;animation-delay:1s}
+.badge-4{bottom:30px;right:20px;animation-delay:1.5s}
 
-section{padding:42px 0}
+section{padding:44px 0}
 
 .section-title{
   margin:0 0 12px;
-  font-size:clamp(2rem,4vw,3.2rem);
+  font-size:clamp(2rem,4vw,3.3rem);
   line-height:1;
   letter-spacing:-.045em;
 }
@@ -374,6 +444,12 @@ section{padding:42px 0}
   border-radius:var(--radius);
   padding:24px;
   box-shadow:var(--shadow);
+  transition:.25s ease;
+}
+
+.card:hover{
+  border-color:rgba(99,231,255,.16);
+  transform:translateY(-4px);
 }
 
 .label{
@@ -403,13 +479,13 @@ section{padding:42px 0}
 
 .demo-card{
   display:grid;
-  grid-template-columns:1.05fr .95fr;
+  grid-template-columns:1.04fr .96fr;
   gap:18px;
   align-items:stretch;
 }
 
 .demo-preview{
-  min-height:340px;
+  min-height:360px;
   border-radius:22px;
   border:1px solid rgba(255,255,255,.1);
   padding:24px;
@@ -434,7 +510,7 @@ section{padding:42px 0}
 }
 
 .qr-box{
-  width:138px;
+  width:140px;
   aspect-ratio:1;
   border-radius:18px;
   background:
@@ -443,6 +519,12 @@ section{padding:42px 0}
   background-blend-mode:multiply;
   border:8px solid #fff;
   box-shadow:0 18px 36px rgba(0,0,0,.22);
+  animation: qrPulse 4s ease-in-out infinite;
+}
+
+@keyframes qrPulse{
+  0%,100%{box-shadow:0 18px 36px rgba(0,0,0,.22)}
+  50%{box-shadow:0 18px 44px rgba(99,231,255,.22)}
 }
 
 .demo-list,
@@ -474,6 +556,7 @@ section{padding:42px 0}
   left:0;
   top:0;
   color:var(--accent-2);
+  font-weight:900;
 }
 
 .step-number{
@@ -500,8 +583,8 @@ section{padding:42px 0}
 }
 
 .score-ring{
-  width:190px;
-  height:190px;
+  width:196px;
+  height:196px;
   margin:0 auto;
   border-radius:50%;
   display:grid;
@@ -510,6 +593,12 @@ section{padding:42px 0}
     conic-gradient(var(--accent) 0 78%, rgba(255,255,255,.08) 78% 100%);
   position:relative;
   box-shadow:0 20px 40px rgba(0,0,0,.22);
+  animation: scoreSpin 10s linear infinite;
+}
+
+@keyframes scoreSpin{
+  from{transform:rotate(0)}
+  to{transform:rotate(360deg)}
 }
 
 .score-ring::after{
@@ -528,6 +617,13 @@ section{padding:42px 0}
   font-size:2.3rem;
   font-weight:900;
   letter-spacing:-.05em;
+  transform:rotate(-360deg);
+  animation: counterSpin 10s linear infinite;
+}
+
+@keyframes counterSpin{
+  from{transform:rotate(0)}
+  to{transform:rotate(-360deg)}
 }
 
 .score-number small{
@@ -601,11 +697,13 @@ section{padding:42px 0}
   color:#dffaff;
   font-weight:800;
   font-size:.85rem;
+  transition:.2s ease;
 }
 
 .mini-link:hover{
   background:rgba(99,231,255,.1);
   border-color:rgba(99,231,255,.2);
+  transform:translateY(-2px);
 }
 
 .package-price{
@@ -654,6 +752,7 @@ section{padding:42px 0}
   color:#dcf9ff;
   font-weight:900;
   letter-spacing:.08em;
+  box-shadow:var(--shadow-2);
 }
 
 .quote-box{
@@ -674,8 +773,85 @@ section{padding:42px 0}
   font-size:.95rem;
 }
 
+.intake-wrap{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  align-items:start;
+}
+
+.form-grid{
+  display:grid;
+  gap:14px;
+}
+
+.form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.field{
+  display:grid;
+  gap:8px;
+}
+
+.field label{
+  font-size:.88rem;
+  font-weight:800;
+  color:#dff9ff;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  background:rgba(255,255,255,.04);
+  color:var(--text);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:16px;
+  padding:14px 14px;
+  font:inherit;
+  outline:none;
+  transition:.2s ease;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:rgba(99,231,255,.34);
+  box-shadow:0 0 0 4px rgba(99,231,255,.08);
+}
+
+.field textarea{
+  min-height:132px;
+  resize:vertical;
+}
+
+.form-note{
+  color:var(--muted);
+  font-size:.92rem;
+  margin-top:4px;
+}
+
+.form-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  align-items:center;
+}
+
+.status{
+  font-size:.92rem;
+  font-weight:700;
+  min-height:20px;
+}
+
+.status.success{color:var(--success)}
+.status.error{color:var(--danger)}
+
 .cta{
-  padding:58px 0 84px;
+  padding:60px 0 86px;
 }
 
 .cta-box{
@@ -713,13 +889,25 @@ section{padding:42px 0}
   font-size:.92rem;
 }
 
-@media (max-width: 1040px){
+.reveal{
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity .6s ease, transform .6s ease;
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+@media (max-width: 1080px){
   .hero-grid,
   .demo-card,
   .tas-wrap,
   .grid-3,
   .grid-2,
-  .logo-wall{
+  .logo-wall,
+  .intake-wrap{
     grid-template-columns:1fr;
   }
 
@@ -736,27 +924,31 @@ section{padding:42px 0}
   }
 }
 
-@media (max-width: 680px){
+@media (max-width: 700px){
   .hero{padding-top:62px}
   .container{width:min(calc(100% - 20px), var(--max))}
   .btn{width:100%}
-  .hero-actions{flex-direction:column}
+  .hero-actions,.form-actions{flex-direction:column}
   .cta-box,.card,.visual-shell{padding:20px}
   .screen{min-height:520px}
+  .screen-body{min-height:calc(520px - 45px)}
+  .scan-art{min-height:440px}
   .floating-badge{font-size:.78rem;padding:10px 12px}
   .badge-1{top:16px;left:12px}
   .badge-2{top:66px;right:12px}
   .badge-3{bottom:86px;left:12px}
   .badge-4{bottom:22px;right:12px}
+  .form-row{grid-template-columns:1fr}
+  .brand-text span{display:none}
 }
 
   </style>
 </head>
-<body>  <nav class="nav">
+<body>  <nav class="nav" id="nav">
     <div class="container nav-inner">
       <a href="#top" class="brand">
         <div class="brand-logo">
-          <svg viewBox="0 0 100 100" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 100 100" width="50" height="50" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#63e7ff"/>
@@ -776,44 +968,46 @@ section{padding:42px 0}
         </div>
       </a>  <div class="nav-links">
     <a href="#demo">Demo</a>
-    <a href="#how">How It Works</a>
+    <a href="#why-yes">Why</a>
     <a href="#tas">T.A.S.</a>
     <a href="#proof">Proof</a>
     <a href="#pricing">Pricing</a>
     <a href="#fit">Fit</a>
+    <a href="#intake">Intake</a>
   </div>
 
-  <a href="mailto:hiddenleverage.ai@gmail.com?subject=I%20Want%20My%20ScanCraft%20Score" class="btn btn-secondary">Get Your Score</a>
+  <a href="#intake" class="btn btn-secondary">Get Your Score</a>
 </div>
 
   </nav>  <header class="hero" id="top">
     <div class="container hero-grid">
-      <div>
+      <div class="reveal">
         <div class="eyebrow">QR-powered digital leverage for modern local business</div>
         <h1>Make Your Business Impossible to Ignore After One Scan.</h1>
         <p class="lead">
           ScanCraft builds branded QR-powered digital experiences for businesses that want more than a basic website.
-          We turn menus, products, cards, counters, and customer touchpoints into modern conversion systems that feel premium, memorable, and built to move people.
+          We turn menus, products, packaging, cards, counters, and customer touchpoints into modern conversion systems
+          that feel premium, memorable, and built to move people.
         </p>    <div class="hero-actions">
-      <a href="mailto:hiddenleverage.ai@gmail.com?subject=I%20Want%20My%20ScanCraft%20Score" class="btn btn-primary">Get Your ScanCraft Score</a>
+      <a href="#intake" class="btn btn-primary">Get Your ScanCraft Score</a>
       <a href="#demo" class="btn btn-secondary">View Live Demo Paths</a>
     </div>
 
     <div class="hero-strip">
       <span class="strip-pill">Free ScanCraft Score</span>
+      <span class="strip-pill">Restaurants + Product Brands</span>
       <span class="strip-pill">Live Demo Paths</span>
-      <span class="strip-pill">Built for Local Business</span>
       <span class="strip-pill">Fast Turnaround Available</span>
     </div>
 
     <div class="hero-stats">
       <div class="stat">
         <strong>Scan Once</strong>
-        <span>Instant access from a card, menu, package, table, or display.</span>
+        <span>Instant access from a card, menu, package, table, label, or display.</span>
       </div>
       <div class="stat">
         <strong>Feel the Brand</strong>
-        <span>Customers step into a branded mobile experience, not plain text.</span>
+        <span>Customers enter a branded digital layer, not plain information.</span>
       </div>
       <div class="stat">
         <strong>Drive Action</strong>
@@ -822,7 +1016,7 @@ section{padding:42px 0}
     </div>
   </div>
 
-  <div class="visual-shell">
+  <div class="visual-shell reveal">
     <div class="screen">
       <div class="screen-top">
         <div class="dot"></div>
@@ -868,4 +1062,597 @@ section{padding:42px 0}
             <rect x="308" y="324" width="120" height="16" rx="8" fill="rgba(255,255,255,.08)"/>
             <rect x="308" y="356" width="144" height="18" rx="9" fill="url(#lineGlow)" opacity=".75"/>
 
-            <rect x="325" y="227" width="10" 
+            <rect x="325" y="227" width="10" height="10" fill="#0a1d2a"/>
+            <rect x="337" y="227" width="10" height="10" fill="#0a1d2a"/>
+            <rect x="349" y="227" width="10" height="10" fill="#0a1d2a"/>
+            <rect x="325" y="239" width="10" height="10" fill="#0a1d2a"/>
+            <rect x="349" y="239" width="10" height="10" fill="#0a1d2a"/>
+            <rect x="325" y="251" width="10" height="10" fill="#0a1d2a"/>
+            <rect x="337" y="251" width="10" height="10" fill="#0a1d2a"/>
+            <rect x="349" y="251" width="10" height="10" fill="#0a1d2a"/>
+
+            <path d="M126 132 L250 206" stroke="url(#lineGlow)" stroke-width="3" opacity=".72"/>
+            <path d="M110 290 L248 290" stroke="url(#lineGlow)" stroke-width="3" opacity=".72"/>
+            <path d="M124 436 L254 366" stroke="url(#lineGlow)" stroke-width="3" opacity=".72"/>
+
+            <path d="M510 206 L636 132" stroke="url(#lineGlow)" stroke-width="3" opacity=".72"/>
+            <path d="M512 290 L648 290" stroke="url(#lineGlow)" stroke-width="3" opacity=".72"/>
+            <path d="M506 366 L634 436" stroke="url(#lineGlow)" stroke-width="3" opacity=".72"/>
+
+            <g>
+              <rect x="52" y="98" width="70" height="70" rx="16" fill="#ffffff"/>
+              <rect x="68" y="114" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="80" y="114" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="92" y="114" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="68" y="126" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="92" y="126" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="68" y="138" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="80" y="138" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="92" y="138" width="10" height="10" fill="#0a1d2a"/>
+            </g>
+
+            <g>
+              <rect x="42" y="258" width="104" height="64" rx="18" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.12)"/>
+              <text x="58" y="286" fill="#eef8ff" font-size="16" font-family="Arial" font-weight="700">MENU</text>
+              <text x="58" y="307" fill="#9cb4c7" font-size="12" font-family="Arial">story • offers • CTA</text>
+            </g>
+
+            <g>
+              <rect x="50" y="404" width="112" height="64" rx="18" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.12)"/>
+              <text x="66" y="432" fill="#eef8ff" font-size="16" font-family="Arial" font-weight="700">BRAND</text>
+              <text x="66" y="453" fill="#9cb4c7" font-size="12" font-family="Arial">vibe • trust • polish</text>
+            </g>
+
+            <g>
+              <rect x="638" y="98" width="70" height="70" rx="16" fill="#ffffff"/>
+              <rect x="654" y="114" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="666" y="114" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="678" y="114" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="654" y="126" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="678" y="126" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="654" y="138" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="666" y="138" width="10" height="10" fill="#0a1d2a"/>
+              <rect x="678" y="138" width="10" height="10" fill="#0a1d2a"/>
+            </g>
+
+            <g>
+              <rect x="612" y="258" width="112" height="64" rx="18" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.12)"/>
+              <text x="630" y="286" fill="#eef8ff" font-size="16" font-family="Arial" font-weight="700">SOCIAL</text>
+              <text x="630" y="307" fill="#9cb4c7" font-size="12" font-family="Arial">proof • media • flow</text>
+            </g>
+
+            <g>
+              <rect x="598" y="404" width="138" height="64" rx="18" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.12)"/>
+              <text x="616" y="432" fill="#eef8ff" font-size="16" font-family="Arial" font-weight="700">CONVERSION</text>
+              <text x="616" y="453" fill="#9cb4c7" font-size="12" font-family="Arial">click • call • buy • book</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>  <section id="demo" class="reveal">
+    <div class="container">
+      <h2 class="section-title">Live Demo Paths</h2>
+      <p class="section-copy">
+        ScanCraft closes harder when people can feel it instantly. These live demo paths show how one scan can
+        turn a basic touchpoint into a branded customer experience.
+      </p>  <div class="card demo-card">
+    <div class="demo-preview">
+      <div>
+        <div class="label">Experience Layer</div>
+        <h3>Not a link. A branded moment.</h3>
+        <p>
+          Customers do not just read about the business. They step into a sharpened digital experience
+          designed to hold attention and move them toward action.
+        </p>
+      </div>
+
+      <div style="display:flex; align-items:end; justify-content:space-between; gap:16px; flex-wrap:wrap;">
+        <div class="qr-box"></div>
+        <a href="https://jessepinkman519-dev.github.io/Fischtacos/" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Launch Farm &amp; Sea Demo</a>
+      </div>
+    </div>
+
+    <div class="card" style="background:rgba(255,255,255,.03); box-shadow:none;">
+      <div class="label">What can be layered in</div>
+      <ul class="demo-list">
+        <li>Owner or brand story sections</li>
+        <li>Product or menu showcases with premium feel</li>
+        <li>Instagram or content-driven trust layers</li>
+        <li>Offers, events, loyalty hooks, or promotions</li>
+        <li>QR business cards that open into a whole system</li>
+        <li>Calls to action designed to get a real response</li>
+      </ul>
+
+      <div class="proof-links">
+        <a class="mini-link" href="https://jessepinkman519-dev.github.io/Fischtacos/" target="_blank" rel="noopener noreferrer">Farm &amp; Sea Demo</a>
+        <a class="mini-link" href="https://jessepinkman519-dev.github.io/bandon-coffe-demo/" target="_blank" rel="noopener noreferrer">Bandon Coffee Demo</a>
+        <a class="mini-link" href="https://jessepinkman519-dev.github.io/Coastal-Crafted-budda/" target="_blank" rel="noopener noreferrer">Coastal Creations Demo</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </section>  <section id="why-yes" class="reveal">
+    <div class="container">
+      <h2 class="section-title">Why Businesses Say Yes</h2>
+      <p class="section-copy">
+        Because ScanCraft does not ask a business to become something else. It sharpens what is already there
+        and makes the customer experience hit harder.
+      </p>  <div class="grid-3">
+    <div class="card">
+      <div class="label">No Full Rebuild Needed</div>
+      <p style="margin:0;color:var(--muted);">
+        ScanCraft layers on top of existing touchpoints instead of forcing a giant tech overhaul.
+      </p>
+    </div>
+    <div class="card">
+      <div class="label">Looks Premium Fast</div>
+      <p style="margin:0;color:var(--muted);">
+        The goal is immediate improvement in perception, polish, and digital presence.
+      </p>
+    </div>
+    <div class="card">
+      <div class="label">Built To Get A Response</div>
+      <p style="margin:0;color:var(--muted);">
+        Better attention, clearer action paths, stronger customer interaction.
+      </p>
+    </div>
+  </div>
+</div>
+
+  </section>  <section id="how" class="reveal">
+    <div class="container">
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-copy">
+        Clean on the surface. Lethal underneath. The system is built to remove friction and give a business
+        a modern customer-facing edge without requiring a full rebuild.
+      </p>  <div class="grid-3">
+    <div class="card">
+      <span class="step-number">01</span>
+      <h3 style="margin:0 0 10px;">Scan</h3>
+      <p style="margin:0; color:var(--muted);">
+        A customer scans from a card, menu, product label, counter display, table tent,
+        poster, package, or event asset.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="step-number">02</span>
+      <h3 style="margin:0 0 10px;">Enter</h3>
+      <p style="margin:0; color:var(--muted);">
+        They land inside a mobile-first branded layer designed around identity, storytelling,
+        credibility, and customer curiosity.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="step-number">03</span>
+      <h3 style="margin:0 0 10px;">Act</h3>
+      <p style="margin:0; color:var(--muted);">
+        They click, inquire, follow, book, buy, engage, or remember the business more clearly
+        because the experience actually left a mark.
+      </p>
+    </div>
+  </div>
+</div>
+
+  </section>  <section id="tas" class="reveal">
+    <div class="container">
+      <h2 class="section-title">ScanCraft T.A.S.</h2>
+      <p class="section-copy">
+        The Target Acquisition System evaluates how much leverage a business is currently leaving on the table,
+        then maps the opportunity to upgrade its digital surface and customer journey.
+      </p>  <div class="tas-wrap">
+    <div class="card score-panel">
+      <div>
+        <div class="label">Target Score Preview</div>
+        <div class="score-ring">
+          <div class="score-number">7.8<small>/ 10 opportunity</small></div>
+        </div>
+      </div>
+
+      <div class="score-bands">
+        <div class="band">
+          <strong>1–3 | Weak Surface</strong>
+          <span>Minimal digital leverage, weak presentation, low engagement path, missed trust signals.</span>
+        </div>
+        <div class="band">
+          <strong>4–7 | Upgrade Zone</strong>
+          <span>Good bones, but underdeveloped digital experience, customer journey, or conversion layer.</span>
+        </div>
+        <div class="band">
+          <strong>8–10 | High Leverage Build</strong>
+          <span>Strong digital positioning, polished experience, clear action path, scalable business perception.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="label">What T.A.S. Checks</div>
+      <ul class="feature-list">
+        <li>First digital impression and authority level</li>
+        <li>Mobile readiness and customer accessibility</li>
+        <li>Brand atmosphere, uniqueness, and memorability</li>
+        <li>Conversion clarity from curiosity to action</li>
+        <li>Social integration and proof opportunities</li>
+        <li>Hidden leverage points in the current business setup</li>
+      </ul>
+
+      <div style="height:16px;"></div>
+
+      <a href="#intake" class="btn btn-primary">Get Your ScanCraft Score</a>
+    </div>
+  </div>
+</div>
+
+  </section>  <section id="proof" class="reveal">
+    <div class="container">
+      <h2 class="section-title">Built to Be Felt</h2>
+      <p class="section-copy">
+        ScanCraft is not locked to one type of business. It works wherever presentation, perception,
+        and customer interaction matter.
+      </p>  <div class="grid-3">
+    <div class="card case-card">
+      <div class="label">Restaurant Demo</div>
+      <h3>Farm &amp; Sea</h3>
+      <p>
+        Premium mobile food experience concept designed to elevate product storytelling,
+        showcase menu energy, and create a more modern customer touchpoint.
+      </p>
+      <ul class="proof-list">
+        <li>Premium menu presentation</li>
+        <li>Stronger perceived value</li>
+        <li>Better scan-to-engagement experience</li>
+      </ul>
+      <span class="result-pill">Live demo ready</span>
+      <div class="proof-links">
+        <a class="mini-link" href="https://jessepinkman519-dev.github.io/Fischtacos/" target="_blank" rel="noopener noreferrer">Open Demo</a>
+      </div>
+    </div>
+
+    <div class="card case-card">
+      <div class="label">Cafe Demo</div>
+      <h3>Bandon Coffee</h3>
+      <p>
+        Coffee experience concept centered around mobile polish, visual identity,
+        and a cleaner customer-facing digital layer that feels more current.
+      </p>
+      <ul class="proof-list">
+        <li>Cleaner digital authority</li>
+        <li>Improved customer presentation</li>
+        <li>Sharpened first impression</li>
+      </ul>
+      <span class="result-pill">Live demo ready</span>
+      <div class="proof-links">
+        <a class="mini-link" href="https://jessepinkman519-dev.github.io/bandon-coffe-demo/" target="_blank" rel="noopener noreferrer">Open Demo</a>
+      </div>
+    </div>
+
+    <div class="card case-card">
+      <div class="label">Product Brand Demo</div>
+      <h3>Coastal Creations Butter</h3>
+      <p>
+        A premium product-brand experience built to make a physical food item feel elevated,
+        giftable, and story-driven through packaging-friendly digital presentation.
+      </p>
+      <ul class="proof-list">
+        <li>Product-first storytelling</li>
+        <li>Brand texture and premium feel</li>
+        <li>Perfect fit for labels, jars, packaging, and markets</li>
+      </ul>
+      <span class="result-pill">Live demo ready</span>
+      <div class="proof-links">
+        <a class="mini-link" href="https://jessepinkman519-dev.github.io/Coastal-Crafted-budda/" target="_blank" rel="noopener noreferrer">Open Demo</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="logo-wall">
+    <div class="logo-chip">SCAN</div>
+    <div class="logo-chip">STORY</div>
+    <div class="logo-chip">VIBE</div>
+    <div class="logo-chip">CONVERT</div>
+  </div>
+</div>
+
+  </section>  <section id="proof-quote" class="reveal">
+    <div class="container">
+      <div class="card quote-box">
+        <div class="label">Proof of Direction</div>
+        <p>
+          “This makes way more sense when you actually see it. It feels modern, clean, and way more engaging than just handing someone information.”
+        </p>
+        <p class="quote-source">Early demo feedback</p>
+      </div>
+    </div>
+  </section>  <section id="pricing" class="reveal">
+    <div class="container">
+      <h2 class="section-title">Simple Packages. Serious Leverage.</h2>
+      <p class="section-copy">
+        Start with the right layer for the business. Expand into deeper systems when it makes sense.
+      </p>  <div class="grid-3">
+    <div class="card package-card">
+      <div class="label">Starter</div>
+      <h3>Launch Layer</h3>
+      <div class="package-price">$250+</div>
+      <p>For businesses that need a professional QR-powered experience live fast.</p>
+      <ul class="package-list">
+        <li>Single-page experience</li>
+        <li>QR connection setup</li>
+        <li>Basic call-to-action flow</li>
+        <li>Fast deployment</li>
+      </ul>
+    </div>
+
+    <div class="card package-card featured">
+      <div class="featured-badge">Best First Move</div>
+      <div class="label">Growth</div>
+      <h3>Brand Experience Build</h3>
+      <div class="package-price">$500+</div>
+      <p>Best for owners who want customers to feel the difference immediately and respond to it.</p>
+      <ul class="package-list">
+        <li>Enhanced branded mobile experience</li>
+        <li>Story, media, and trust sections</li>
+        <li>Offer or conversion positioning</li>
+        <li>Higher-end presentation polish</li>
+      </ul>
+    </div>
+
+    <div class="card package-card">
+      <div class="label">Authority</div>
+      <h3>Full Leverage System</h3>
+      <div class="package-price">Custom</div>
+      <p>For serious businesses that want branded digital infrastructure, stronger positioning, and a sharper close.</p>
+      <ul class="package-list">
+        <li>Custom digital ecosystem</li>
+        <li>Multi-page or multi-path structure</li>
+        <li>T.A.S. analysis and strategy layer</li>
+        <li>Branded asset integration</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+  </section>  <section id="fit" class="reveal">
+    <div class="container">
+      <h2 class="section-title">Who ScanCraft Is For</h2>
+      <p class="section-copy">
+        ScanCraft works best for businesses that already have something real — they just need a stronger digital surface and a better way for customers to feel it.
+      </p>  <div class="grid-2">
+    <div class="card">
+      <div class="label">Best Fit</div>
+      <ul class="feature-list">
+        <li>Restaurants, lounges, cafes, retail, events, and product brands</li>
+        <li>Businesses with real-world traffic but weak digital presentation</li>
+        <li>Brands that want packaging, displays, or cards to lead into an experience</li>
+        <li>Owners who want a premium feel without a full rebuild</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="label">Not A Fit</div>
+      <ul class="feature-list">
+        <li>Businesses looking for a generic template site only</li>
+        <li>Owners who do not want customer-facing digital upgrades</li>
+        <li>Projects with no interest in brand feel, story, or conversion</li>
+        <li>Businesses that only want the cheapest basic page possible</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+  </section>  <section id="intake" class="reveal">
+    <div class="container">
+      <h2 class="section-title">Get Your ScanCraft Score</h2>
+      <p class="section-copy">
+        Fill this out and use it as your intake layer. On GitHub Pages this form won’t send by itself without a backend,
+        so this build turns the answers into a pre-filled email draft the visitor can send in one tap.
+      </p>  <div class="intake-wrap">
+    <div class="card">
+      <div class="label">Business Intake</div>
+      <form id="tasForm" class="form-grid">
+        <div class="form-row">
+          <div class="field">
+            <label for="businessName">Business Name</label>
+            <input id="businessName" name="businessName" type="text" placeholder="Ex: Coastal Creations" required />
+          </div>
+          <div class="field">
+            <label for="contactName">Your Name</label>
+            <input id="contactName" name="contactName" type="text" placeholder="Ex: Jesse" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+          </div>
+          <div class="field">
+            <label for="businessType">Business Type</label>
+            <select id="businessType" name="businessType" required>
+              <option value="">Select one</option>
+              <option>Restaurant</option>
+              <option>Cafe</option>
+              <option>Lounge / Bar</option>
+              <option>Retail</option>
+              <option>Product Brand</option>
+              <option>Event / Entertainment</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="goal">Primary Goal</label>
+            <select id="goal" name="goal" required>
+              <option value="">Select one</option>
+              <option>More customers</option>
+              <option>Stronger brand feel</option>
+              <option>Better product presentation</option>
+              <option>Higher perceived value</option>
+              <option>More inquiries / bookings</option>
+              <option>Cleaner digital presence</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="timeline">Timeline</label>
+            <select id="timeline" name="timeline" required>
+              <option value="">Select one</option>
+              <option>ASAP</option>
+              <option>Within 2 weeks</option>
+              <option>Within 30 days</option>
+              <option>Just exploring</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="website">Current Website or Social Link</label>
+          <input id="website" name="website" type="text" placeholder="Website, Instagram, Facebook, or none yet" />
+        </div>
+
+        <div class="field">
+          <label for="notes">What do you want improved?</label>
+          <textarea id="notes" name="notes" placeholder="Tell ScanCraft what feels weak, outdated, underleveraged, or missing."></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Create My Intake Email</button>
+          <button type="button" class="btn btn-ghost" id="copySummaryBtn">Copy Summary</button>
+        </div>
+        <div class="status" id="formStatus"></div>
+      </form>
+    </div>
+
+    <div class="card">
+      <div class="label">What Happens Next</div>
+      <ul class="feature-list">
+        <li>ScanCraft reviews the current digital surface of the business</li>
+        <li>Touchpoints, friction, and missed leverage areas get identified</li>
+        <li>A score and upgrade direction can be mapped from there</li>
+        <li>The goal is not more noise — it is a sharper customer experience</li>
+      </ul>
+
+      <div style="height:18px;"></div>
+
+      <div class="label">Best Use Cases</div>
+      <ul class="feature-list">
+        <li>Menus that need to feel premium</li>
+        <li>Products that deserve packaging-linked storytelling</li>
+        <li>Local businesses with real traffic but weak digital presentation</li>
+        <li>Cards, labels, counters, displays, and product packaging</li>
+      </ul>
+
+      <div style="height:18px;"></div>
+
+      <a href="mailto:hiddenleverage.ai@gmail.com?subject=I%20Want%20My%20ScanCraft%20Score" class="btn btn-secondary">Or Email Directly</a>
+      <p class="form-note">Direct email opens your mail app immediately. The intake form above helps structure the lead.</p>
+    </div>
+  </div>
+</div>
+
+  </section>  <section class="cta reveal" id="contact">
+    <div class="container">
+      <div class="cta-box">
+        <div class="label">Free business evaluation available</div>
+        <h2>See Exactly What Your Business Is Leaving On The Table</h2>
+        <p>
+          Whether you need a branded QR experience, a live demo, or a full ScanCraft score,
+          this is where the upgrade begins.
+        </p>
+        <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+          <a href="#intake" class="btn btn-primary">Get My ScanCraft Score</a>
+          <a href="https://jessepinkman519-dev.github.io/Coastal-Crafted-budda/" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">View Coastal Demo</a>
+        </div>
+      </div>
+    </div>
+  </section>  <div class="footer">
+    <div class="container">
+      ScanCraft © 2026 · QR-powered digital experiences for modern local businesses and product brands
+    </div>
+  </div>  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 12) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+
+    reveals.forEach(el => revealObserver.observe(el));
+
+    const tasForm = document.getElementById('tasForm');
+    const formStatus = document.getElementById('formStatus');
+    const copySummaryBtn = document.getElementById('copySummaryBtn');
+
+    function buildSummary() {
+      const businessName = document.getElementById('businessName').value.trim();
+      const contactName = document.getElementById('contactName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const businessType = document.getElementById('businessType').value.trim();
+      const goal = document.getElementById('goal').value.trim();
+      const timeline = document.getElementById('timeline').value.trim();
+      const website = document.getElementById('website').value.trim();
+      const notes = document.getElementById('notes').value.trim();
+
+      return [
+        'ScanCraft Score Request',
+        '',
+        'Business Name: ' + businessName,
+        'Contact Name: ' + contactName,
+        'Email: ' + email,
+        'Business Type: ' + businessType,
+        'Primary Goal: ' + goal,
+        'Timeline: ' + timeline,
+        'Current Website/Social: ' + (website || 'N/A'),
+        'Improvement Notes: ' + (notes || 'N/A')
+      ].join('\\n');
+    }
+
+    tasForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      if (!tasForm.reportValidity()) {
+        formStatus.textContent = 'Please complete the required fields first.';
+        formStatus.className = 'status error';
+        return;
+      }
+
+      const businessName = document.getElementById('businessName').value.trim() || 'Business';
+      const summary = buildSummary();
+      const subject = encodeURIComponent('ScanCraft Score Request - ' + businessName);
+      const body = encodeURIComponent(summary);
+
+      window.location.href = 'mailto:hiddenleverage.ai@gmail.com?subject=' + subject + '&body=' + body;
+
+      formStatus.textContent = 'Your email draft is opening now.';
+      formStatus.className = 'status success';
+    });
+
+    copySummaryBtn.addEventListener('click', async function() {
+      if (!tasForm.reportValidity()) {
+        formStatus.textContent = 'Fill out the required fields first, then copy the summary.';
+        formStatus.className = 'status error';
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(buildSummary());
+        formStatus.textContent = 'Intake summary copied to clipboard.';
+        formStatus.className = 'status success';
+      } catch (err) {
+        formStatus.textContent = 'Clipboard copy failed on this device. Use the email button instead.';
+        formStatus.className = 'status error';
+      }
+    });
+  </script></body>
+</html>
